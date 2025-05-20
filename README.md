@@ -1,0 +1,52 @@
+# Flask Docker CI Example
+
+A simple Flask application with Docker and GitHub Actions CI.
+
+## Project Structure
+
+- `app.py`: Simple Flask application
+- `test_app.py`: Tests for the Flask application
+- `Dockerfile`: Docker configuration for containerizing the app
+- `.github/workflows/docker-ci.yml`: GitHub Actions workflow for CI
+
+## CI Pipeline
+
+The CI pipeline performs the following steps:
+
+1. Builds a Docker image from the Dockerfile
+2. Runs pytest tests inside the Docker container
+3. Starts the application container
+4. Tests the running application with HTTP requests
+5. Cleans up the container
+
+## Local Development
+
+### Build and Run with Docker
+
+```bash
+# Build the Docker image
+docker build -t flask-app:local .
+
+# Run the container
+docker run -p 5000:5000 flask-app:local
+```
+
+### Run Tests
+
+```bash
+# Run tests with Docker
+docker run flask-app:local pytest
+```
+
+## Without Docker
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python app.py
+
+# Run tests
+pytest
+```
