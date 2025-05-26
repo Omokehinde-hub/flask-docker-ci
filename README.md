@@ -31,22 +31,3 @@ docker build -t flask-app:local .
 docker run -p 5000:5000 flask-app:local
 ```
 ![Screenshot](https://github.com/Omokehinde-hub/flask-docker-ci/blob/main/flask-app-ci.png)
-### Run Tests
-
-```bash
-# Run tests with Docker
-docker run flask-app:local pytest
-```
-
-## Without Docker
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the application
-python app.py
-
-# Run tests
-pytest
-```
