@@ -1,7 +1,9 @@
 # Flask Docker CI Example
 
-A simple Flask application with Docker and GitHub Actions CI.
-This App makes use of a github action and has been tested and its working properly
+- A simple Flask application with Docker and GitHub Actions CI.
+- This App makes use of a github action and has been tested and its working properly.
+  [![Docker CI](https://github.com/omokehinde-hub/flask-docker-ci/actions/workflows/docker-ci.yml/badge.svg)](https://github.com/salamkehindesam/flask-ci-app/actions/workflows/docker-ci.yml)
+
 
 ## Project Structure
 
