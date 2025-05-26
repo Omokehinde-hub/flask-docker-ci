@@ -34,8 +34,20 @@ jobs:
     - name: Run Docker image
       run: |
         docker run -d -p 5000:5000 --name flask-container flask-app:test
-        sleep 5
+
+        # Wait for app to become responsive
+        for i in {1..10}; do
+          if curl -s http://localhost:5000/ > /dev/null; then
+            echo "App is up!"
+            break
+          fi
+          echo "Waiting for the app to start..."
+          sleep 2
+        done
         
+    - name: Debug container logs (optional, for troubleshooting)
+      run: docker logs flask-container
+      
     - name: Test the running application
       run: |
         response=$(curl -s http://localhost:5000/)
@@ -52,6 +64,11 @@ jobs:
           exit 1
         fi
         
+    - name: Clean up
+      run: |
+        docker stop flask-container || true
+        docker rm flask-container || true
+
     - name: Clean up
       run: |
         docker stop flask-container || true
