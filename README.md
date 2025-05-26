@@ -30,7 +30,7 @@ docker build -t flask-app:local .
 # Run the container
 docker run -p 5000:5000 flask-app:local
 ```
-
+![Screenshot](https://github.com/Omokehinde-hub/flask-docker-ci/blob/main/flask-app-ci.png)
 ### Run Tests
 
 ```bash
