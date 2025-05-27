@@ -26,7 +26,6 @@ A minimal Flask application containerized with Docker and integrated with GitHub
 ├── test_app.py                # Unit tests for the application
 ├── Dockerfile                 # Docker configuration
 ├── requirements.txt           # Python dependencies
-├── flask-app-ci.png           # CI pipeline diagram
 └── .github/
     └── workflows/
         └── docker-ci.yml      # GitHub Actions workflow
@@ -91,13 +90,6 @@ pip install -r requirements.txt
 pytest
 ```
 
----
-
-## 📸 CI Pipeline Diagram
-
-![CI Pipeline](flask-app-ci.png)
-
----
 
 ---
 
