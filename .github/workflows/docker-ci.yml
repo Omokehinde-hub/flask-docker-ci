@@ -14,28 +14,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-      
-    - name: Build Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: false
-        load: true
-        tags: flask-app:test
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+    - name: Build Docker image (no cache)
+      run: docker build --no-cache -t flask-app:test .
+
+    - name: Confirm installed packages
+      run: docker run --rm flask-app:test pip list
       
     - name: Run tests in Docker container
-      run: |
-        docker run --rm flask-app:test pytest
-        
+      run: docker run --rm flask-app:test pytest
+      
     - name: Run Docker image
       run: |
         docker run -d -p 5000:5000 --name flask-container flask-app:test
 
-        # Wait for app to become responsive
         for i in {1..10}; do
           if curl -s http://localhost:5000/ > /dev/null; then
             echo "App is up!"
@@ -45,7 +36,7 @@ jobs:
           sleep 2
         done
         
-    - name: Debug container logs (optional, for troubleshooting)
+    - name: Debug container logs
       run: docker logs flask-container
       
     - name: Test the running application
@@ -64,11 +55,6 @@ jobs:
           exit 1
         fi
         
-    - name: Clean up
-      run: |
-        docker stop flask-container || true
-        docker rm flask-container || true
-
     - name: Clean up
       run: |
         docker stop flask-container || true
